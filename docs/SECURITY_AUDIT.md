@@ -23,7 +23,7 @@ must be re-checked. CI enforces the baseline described here.
 | Severity  | Before | After |
 | --------- | -----: | ----: |
 | Critical  |      1 |     0 |
-| High      |     53 |     1 |
+| High      |     53 |     3 |
 | Moderate  |     86 |     8 |
 | Low       |      7 |     2 |
 | **Total** |    147 |    11 |
@@ -117,6 +117,7 @@ the expiry.
 | Package                | Severity | Advisory                                                      | Dependency path                                                                                                   | Owner                          | Expiry     |
 | ---------------------- | -------- | ------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ------------------------------ | ---------- |
 | `braces`               | high     | GHSA-vfj7-8cjw-p6xm                                           | `@solana/wallet-adapter-react` → `@solana-mobile/wallet-adapter-mobile` → `react-native` → `metro` → `micromatch` | `@wraith-protocol/maintainers` | 2027-01-15 |
+| `zod`                  | high     | GHSA-mrhx-c7xc-m3w5                                           | `wagmi` / `@ckb-ccc/ccc` → `abitype` / `viem` → `zod`                                                             | `@wraith-protocol/maintainers` | 2027-01-15 |
 | `uuid`                 | moderate | GHSA-w5hq-g745-h8pq                                           | `@solana/web3.js` → `jayson`/`rpc-websockets`; `wagmi` → `@metamask/utils`                                        | `@wraith-protocol/maintainers` | 2027-01-15 |
 | `valibot`              | moderate | GHSA-5qjj-4xww-7phc                                           | `@ckb-ccc/connector-react` → `@ckb-ccc/connector` → `@ckb-ccc/ccc` → `@ckb-ccc/xverse`                            | `@wraith-protocol/maintainers` | 2027-01-15 |
 | `decode-uri-component` | moderate | GHSA-vcc3-ghjq-m6fr                                           | `wagmi` → `@walletconnect/ethereum-provider` → `@reown/appkit` → `query-string`                                   | `@wraith-protocol/maintainers` | 2027-01-15 |
@@ -132,6 +133,10 @@ Notes:
 - `braces` is currently unfixable: the latest published release (`3.0.3`) is the
   affected version. This entry should be removed as soon as a patched release is
   published.
+- `zod` is pulled in transitively by `wagmi`, `viem`, and `@ckb-ccc/ccc` via
+  dependencies declaring `zod: ^3 >=3.19.1`. The vulnerability GHSA-mrhx-c7xc-m3w5
+  is patched in `>=4.6.6` (a breaking major bump). No patched release exists on
+  the 3.x line.
 
 ## CI gate
 
